@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
-
+const privateKey = require("./app/analytics-key/voyagee-project-3d5e21781986.json");
+const {google} = require("googleapis");
 const app = express();
 
 var corsOptions = (req, callback) => {
@@ -33,6 +34,23 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to News Travel App" });
 });
 
+app.get("/api/dashboard/accessTokens", (req,res) => {
+  // configure a JWT auth client
+  let jwtClient = new google.auth.JWT(
+    privateKey.client_email,
+    null,
+    privateKey.private_key,
+    'https://www.googleapis.com/auth/analytics.readonly');
+
+    jwtClient.authorize(function (err, token) {
+    if (err) {
+      console.log(err);
+      return res.status(500).send('Error');
+    } else {
+      return res.send(token.access_token);
+    }
+  });
+})
 
 app.use('/app/imageUpload', express.static(path.join(__dirname, 'app', 'imageUpload')));
 
