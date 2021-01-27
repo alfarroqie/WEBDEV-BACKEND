@@ -69,3 +69,25 @@ exports.authenticateUser = async (req ,res , next) => {
     }
 }
 
+// exports.getUserIdByToken = (req, res, next) => {
+//     let token = req.headers["Authorization"];
+  
+//     if (!token) {
+//       return res.status(204).send({
+//         message: "No token provided!"
+//       });
+//     }
+  
+//     jwt.verify(token, secret, (err, decoded) => {
+//       if (err) {
+//         return res.status(204).send({
+//           message: "Unauthorized!"
+//         });
+//       }
+//       req.userId = decoded.id;
+//       res.status(200).send(req.userId)
+//     });
+//   };
+
+
+
