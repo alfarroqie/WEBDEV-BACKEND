@@ -153,8 +153,12 @@ exports.login = async (req, res) => {
   authConfig.accessSecret,
   {expiresIn :user.isAdmin? authConfig.adminTimeout:authConfig.userTimeout}
   );
+  const datauser={
+    userId: user.id,
+    isAdmin: user.isAdmin
+  }
     res.status(200).send({
-      message: "Token berhasil dibuat", token : token
+      message: "Token berhasil dibuat", token : token, dataUser: datauser
     });
   } 
   catch(err){
