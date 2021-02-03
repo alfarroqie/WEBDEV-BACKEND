@@ -24,7 +24,7 @@ module.exports = app => {
     router.put("/:id", users.update);
   
     // Delete a Users with id
-    router.delete("/delete", authJwt.authenticateUser, users.delete);
+    router.delete("/delete", authJwt.authenticateAdmin, users.delete);
 
     // Save news
     router.post("/save", users.saveNews);

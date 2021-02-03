@@ -50,7 +50,7 @@ exports.authenticateAdmin = async (req ,res , next) => {
             message : err.message
       })
     }
-}
+};
   
 exports.authenticateUser = async (req ,res , next) => {
     try{
