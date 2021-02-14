@@ -27,12 +27,12 @@ module.exports = app => {
     router.delete("/delete/:id", authJwt.authenticateAdmin, users.delete);
 
     // Save news
-    router.post("/save", users.saveNews);
+    router.post("/save", authJwt.authenticateUser, users.saveNews);
     // Like news
-    router.post("/like", users.likeNews);
+    router.post("/like", authJwt.authenticateUser, users.likeNews);
     
     // Get user with News Saved
-    router.get("/save/:id", users.getSavedUser)
+    router.get("/profile/:id", authJwt.authenticateUser, users.getSavedUser);
   
     app.use('/api/users', router);
   };

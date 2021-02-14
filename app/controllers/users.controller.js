@@ -1,6 +1,7 @@
 const db = require("../models");
 const authConfig = require("../configs/auth.config.js");
 const User = db.users;
+const News = db.news;
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const Op = db.Sequelize.Op;
@@ -237,8 +238,13 @@ exports.getSavedUser = async (req,res) => {
       where: {id : req.params.id},
       include: [{
         model: News,
-        as: 'NewsSaved'
-      }]});
+        attributes: ["id","author","title","views","pictLink"],
+        as: 'NewsSaved',
+        through: {
+          attributes :[],
+        },
+      }]
+    });
     res.status(200).send(user);
   }
   catch(err){

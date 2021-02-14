@@ -1,7 +1,8 @@
-const { categorys } = require("../models");
+const { categorys, users } = require("../models");
 const db = require("../models");
 const News = db.news;
 const Categorys = db.categorys;
+const Users = db.users;
 const Op = db.Sequelize.Op;
 const path = require("path");
 
@@ -117,6 +118,14 @@ exports.findOne = (req, res) => {
           attributes: [],
         },
       },
+      {
+        model: Users,
+        as: "NewsLiked",
+        attributes: ["id","username"],
+        through: {
+          attributes: [],
+        },
+      }
     ]
   })
     .then(data => {
